@@ -26,4 +26,10 @@ public class UserService
             ? Result<OrderModel>.Failure("Order not found")
             : Result<OrderModel>.Success(order);
     }
+
+    public ProductModel GetProduct(int id) {
+      var product = _products.FirstOrDefault(p => p.Id == id);
+      if (product is null) throw new Exception("not found"); // throws instead of Result
+      return product;
+  }
 }
